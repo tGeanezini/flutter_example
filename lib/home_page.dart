@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/nav.dart';
 import 'package:flutter_example/pages/hello_page1.dart';
 import 'package:flutter_example/pages/hello_page2.dart';
 import 'package:flutter_example/pages/hello_page3.dart';
@@ -102,11 +103,7 @@ class HomePage extends StatelessWidget {
   }
 
   void _onClickNavigator(BuildContext context, Widget page) async {
-    String s =
-        await Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return page;
-    }));
-
+    String s = await push(context, page);
     print('>> $s');
   }
 
