@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/model/dog.dart';
 
 class HelloListView extends StatelessWidget {
   @override
@@ -12,19 +13,20 @@ class HelloListView extends StatelessWidget {
   }
 
   _body() {
-    final images = [
-      _img('assets/images/dog1.png'),
-      _img('assets/images/dog2.png'),
-      _img('assets/images/dog3.png'),
-      _img('assets/images/dog4.png'),
-      _img('assets/images/dog5.png'),
+    final dogs = [
+      Dog('Jack Russel','assets/images/dog1.png'),
+      Dog('Golden Retriever','assets/images/dog2.png'),
+      Dog('Pug','assets/images/dog3.png'),
+      Dog('Rottweiler','assets/images/dog4.png'),
+      Dog('Border Collie','assets/images/dog5.png'),
     ];
 
     return ListView.builder(
-      itemCount: images.length,
+      itemCount: dogs.length,
       itemExtent: 300,
       itemBuilder: (context, index) {
-        return images[index];
+        final dog = dogs[index];
+        return _img(dog.photo);
       },
     );
   }
