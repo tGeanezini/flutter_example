@@ -12,14 +12,20 @@ class HelloListView extends StatelessWidget {
   }
 
   _body() {
-    return ListView(
-      children: <Widget>[
-        _img('assets/images/dog1.png'),
-        _img('assets/images/dog2.png'),
-        _img('assets/images/dog3.png'),
-        _img('assets/images/dog4.png'),
-        _img('assets/images/dog5.png'),
-      ],
+    final images = [
+      _img('assets/images/dog1.png'),
+      _img('assets/images/dog2.png'),
+      _img('assets/images/dog3.png'),
+      _img('assets/images/dog4.png'),
+      _img('assets/images/dog5.png'),
+    ];
+
+    return ListView.builder(
+      itemCount: images.length,
+      itemExtent: 300,
+      itemBuilder: (context, index) {
+        return images[index];
+      },
     );
   }
 
