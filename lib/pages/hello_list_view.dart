@@ -14,11 +14,11 @@ class HelloListView extends StatelessWidget {
 
   _body() {
     final dogs = [
-      Dog('Jack Russel','assets/images/dog1.png'),
-      Dog('Golden Retriever','assets/images/dog2.png'),
-      Dog('Pug','assets/images/dog3.png'),
-      Dog('Rottweiler','assets/images/dog4.png'),
-      Dog('Border Collie','assets/images/dog5.png'),
+      Dog('Jack Russel', 'assets/images/dog1.png'),
+      Dog('Golden Retriever', 'assets/images/dog2.png'),
+      Dog('Pug', 'assets/images/dog3.png'),
+      Dog('Rottweiler', 'assets/images/dog4.png'),
+      Dog('Border Collie', 'assets/images/dog5.png'),
     ];
 
     return ListView.builder(
@@ -26,7 +26,21 @@ class HelloListView extends StatelessWidget {
       itemExtent: 300,
       itemBuilder: (context, index) {
         final dog = dogs[index];
-        return _img(dog.photo);
+        return Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            _img(dog.photo),
+            Container(
+              child: Text(
+                dog.name,
+                style: TextStyle(
+                  fontSize: 26,
+                  color: Colors.yellow,
+                ),
+              ),
+            ),
+          ],
+        );
       },
     );
   }
