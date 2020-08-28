@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/widgets/custom_button.dart';
 
 class HelloPage2 extends StatelessWidget {
   @override
@@ -13,16 +14,10 @@ class HelloPage2 extends StatelessWidget {
 
   _body(context) {
     return Center(
-      child: RaisedButton(
-        color: Colors.blue,
-        child: Text(
-          'Voltar',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-          ),
-        ),
+      child: CustomButton(
+        text: 'Voltar',
         onPressed: () => _onClickVoltar(context),
+        color: Colors.red,
       ),
     );
   }

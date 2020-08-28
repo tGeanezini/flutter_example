@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_example/pages/hello_page1.dart';
 import 'package:flutter_example/pages/hello_page2.dart';
 import 'package:flutter_example/pages/hello_page3.dart';
+import 'package:flutter_example/widgets/custom_button.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -66,20 +67,26 @@ class HomePage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            _button(context, 'ListView',
-                () => _onClickNavigator(context, HelloPage1())),
-            _button(context, 'Page 2',
-                () => _onClickNavigator(context, HelloPage2())),
-            _button(context, 'Page 3',
-                () => _onClickNavigator(context, HelloPage3())),
+            CustomButton(
+              text: 'ListView',
+              onPressed: () => _onClickNavigator(context, HelloPage1()),
+            ),
+            CustomButton(
+              text: 'Page 2',
+              onPressed: () => _onClickNavigator(context, HelloPage2()),
+            ),
+            CustomButton(
+              text: 'Page 3',
+              onPressed: () => _onClickNavigator(context, HelloPage3()),
+            ),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            _button(context, 'Snack', _onClickSnack),
-            _button(context, 'Dialog', _onClickDialog),
-            _button(context, 'Toast', _onClickToast),
+            CustomButton(text: 'Snack', onPressed: _onClickSnack),
+            CustomButton(text: 'Dialog', onPressed: _onClickDialog),
+            CustomButton(text: 'Toast', onPressed: _onClickToast),
           ],
         ),
       ],
@@ -92,19 +99,6 @@ class HomePage extends StatelessWidget {
       img,
       fit: BoxFit.cover,
     ));
-  }
-
-  _button(BuildContext context, String text, Function onPressed) {
-    return RaisedButton(
-      color: Colors.blue,
-      child: Text(
-        text,
-        style: TextStyle(
-          color: Colors.white,
-        ),
-      ),
-      onPressed: onPressed,
-    );
   }
 
   void _onClickNavigator(BuildContext context, Widget page) async {
