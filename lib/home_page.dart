@@ -66,9 +66,12 @@ class HomePage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            _button(context, 'ListView', () => _onClickNavigator(context, HelloPage1())),
-            _button(context, 'Page 2', () => _onClickNavigator(context, HelloPage2())),
-            _button(context, 'Page 3', () => _onClickNavigator(context, HelloPage3())),
+            _button(context, 'ListView',
+                () => _onClickNavigator(context, HelloPage1())),
+            _button(context, 'Page 2',
+                () => _onClickNavigator(context, HelloPage2())),
+            _button(context, 'Page 3',
+                () => _onClickNavigator(context, HelloPage3())),
           ],
         ),
         Row(
@@ -104,10 +107,13 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void _onClickNavigator(BuildContext context, Widget page) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
+  void _onClickNavigator(BuildContext context, Widget page) async {
+    String s =
+        await Navigator.push(context, MaterialPageRoute(builder: (context) {
       return page;
     }));
+
+    print('>> $s');
   }
 
   _onClickSnack() {}
