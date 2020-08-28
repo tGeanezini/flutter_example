@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/nav.dart';
+import 'package:flutter_example/pages/hello_list_view.dart';
 import 'package:flutter_example/pages/hello_page1.dart';
 import 'package:flutter_example/pages/hello_page2.dart';
 import 'package:flutter_example/pages/hello_page3.dart';
@@ -70,7 +71,7 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             CustomButton(
               text: 'ListView',
-              onPressed: () => _onClickNavigator(context, HelloPage1()),
+              onPressed: () => _onClickNavigator(context, HelloListView()),
             ),
             CustomButton(
               text: 'Page 2',
