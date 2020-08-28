@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/model/dog.dart';
+import 'package:flutter_example/nav.dart';
+import 'package:flutter_example/pages/dog_page.dart';
 
 class HelloListView extends StatefulWidget {
   @override
@@ -49,7 +51,7 @@ class _HelloListViewState extends State<HelloListView> {
     if (_isGridView) {
       return GridView.builder(
         gridDelegate:
-        SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemCount: dogs.length,
         itemBuilder: (context, index) {
           return _buildItemView(dogs, index);
@@ -66,31 +68,41 @@ class _HelloListViewState extends State<HelloListView> {
     }
   }
 
-  Stack _buildItemView(List<Dog> dogs, int index) {
+  _buildItemView(List<Dog> dogs, int index) {
     final dog = dogs[index];
-    return Stack(
-      fit: StackFit.expand,
-      children: <Widget>[
-        _img(dog.photo),
-        Container(
-          alignment: Alignment.bottomLeft,
-          child: Container(
-            margin: EdgeInsets.all(12),
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black45,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              dog.name,
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
+    return GestureDetector(
+      onTap: () {
+        push(
+          context,
+          DogPage(
+            dog: dog,
+          ),
+        );
+      },
+      child: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          _img(dog.photo),
+          Container(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              margin: EdgeInsets.all(12),
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.black45,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                dog.name,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
