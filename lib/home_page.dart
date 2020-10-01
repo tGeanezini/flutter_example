@@ -5,6 +5,7 @@ import 'package:flutter_example/pages/hello_page1.dart';
 import 'package:flutter_example/pages/hello_page2.dart';
 import 'package:flutter_example/pages/hello_page3.dart';
 import 'package:flutter_example/widgets/custom_button.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -27,7 +28,7 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           _text(),
           _pageView(),
-          _buttons(context),
+          _buttons(),
         ],
       ),
     );
@@ -63,35 +64,41 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  _buttons(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  _buttons() {
+    return Builder(
+      builder: (context) {
+        return Column(
           children: <Widget>[
-            CustomButton(
-              text: 'ListView',
-              onPressed: () => _onClickNavigator(context, HelloListView()),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                CustomButton(
+                  text: 'ListView',
+                  onPressed: () => _onClickNavigator(context, HelloListView()),
+                ),
+                CustomButton(
+                  text: 'Page 2',
+                  onPressed: () => _onClickNavigator(context, HelloPage2()),
+                ),
+                CustomButton(
+                  text: 'Page 3',
+                  onPressed: () => _onClickNavigator(context, HelloPage3()),
+                ),
+              ],
             ),
-            CustomButton(
-              text: 'Page 2',
-              onPressed: () => _onClickNavigator(context, HelloPage2()),
-            ),
-            CustomButton(
-              text: 'Page 3',
-              onPressed: () => _onClickNavigator(context, HelloPage3()),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                CustomButton(
+                    text: 'Snack', onPressed: () => _onClickSnack(context)),
+                CustomButton(
+                    text: 'Dialog', onPressed: () => _onClickDialog(context)),
+                CustomButton(text: 'Toast', onPressed: _onClickToast),
+              ],
             ),
           ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            CustomButton(text: 'Snack', onPressed: _onClickSnack),
-            CustomButton(text: 'Dialog', onPressed: _onClickDialog),
-            CustomButton(text: 'Toast', onPressed: _onClickToast),
-          ],
-        ),
-      ],
+        );
+      },
     );
   }
 
@@ -108,9 +115,50 @@ class HomePage extends StatelessWidget {
     print('>> $s');
   }
 
-  _onClickSnack() {}
+  _onClickSnack(BuildContext context) {
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text('Olá Marilene'),
+    ));
+  }
 
-  _onClickDialog() {}
+  _onClickDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            title: Text('Isso é um dialog'),
+            actions: [
+              FlatButton(
+                child: Text('Cancelar'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              FlatButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
-  _onClickToast() {}
+  _onClickToast() {
+    Fluttertoast.showToast(
+      msg: 'Isso é um toast',
+      toastLength: Toast.LENGTH_LONG,
+      timeInSecForIosWeb: 3,
+      backgroundColor: Colors.black12,
+      textColor: Colors.white,
+      fontSize: 16,
+      gravity: ToastGravity.BOTTOM,
+    );
+  }
 }
