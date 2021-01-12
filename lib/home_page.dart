@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/drawer_list.dart';
 import 'package:flutter_example/pages/hello_page1.dart';
 import 'package:flutter_example/pages/hello_page2.dart';
 import 'package:flutter_example/pages/hello_page3.dart';
@@ -7,21 +8,51 @@ import 'package:fluttertoast/fluttertoast.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Hello Flutter",
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "Hello Flutter",
+          ),
+          bottom: TabBar(
+            tabs: <Widget>[
+              Tab(text: 'Tab 1',),
+              Tab(text: 'Tab 2',),
+            ],
+          ),
         ),
+        body: TabBarView(
+          children: <Widget>[
+            _body(context),
+            Container(
+              color: Colors.amberAccent,
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(
+              Icons.favorite
+          ),
+          onPressed: () {
+            _onClickFab();
+          },
+        ),
+        drawer: DrawerList(),
       ),
-      body: _body(context),
     );
+  }
+
+  _onClickFab() {
+
   }
 
   _body(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 16.0),
       color: Colors.white,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           _text(),
           _pageView(),
